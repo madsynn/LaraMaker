@@ -1,7 +1,44 @@
   https://waffle.io/madsynn/LaraMaker
 
 
-
+├── Commands
+│   └── Command.php
+├── Console
+│   ├── Commands
+│   │   └── Inspire.php
+│   └── Kernel.php
+├── Events
+│   └── Event.php
+├── Exceptions
+│   └── Handler.php
+├── Handlers
+│   ├── Commands
+│   └── Events
+├── Http
+│   ├── Controllers
+│   │   ├── Auth
+│   │   │   ├── AuthController.php
+│   │   │   └── PasswordController.php
+│   │   ├── Controller.php
+│   │   ├── HomeController.php
+│   │   └── WelcomeController.php
+│   ├── Kernel.php
+│   ├── Middleware
+│   │   ├── Authenticate.php
+│   │   ├── RedirectIfAuthenticated.php
+│   │   └── VerifyCsrfToken.php
+│   ├── Requests
+│   │   └── Request.php
+│   └── routes.php
+├── Providers
+│   ├── AppServiceProvider.php
+│   ├── BusServiceProvider.php
+│   ├── ConfigServiceProvider.php
+│   ├── EventServiceProvider.php
+│   └── RouteServiceProvider.php
+├── Services
+│   └── Registrar.php
+└── User.php
 
 
     "php": ">=5.5.9",
