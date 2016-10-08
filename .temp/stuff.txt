@@ -1,0 +1,418 @@
+
+
+
+
+ factory(App\Models\Product::class)->create();  factory(App\Models\Price::class)->create();
+
+
+
+ factory(App\Models\Product::class)->create(),  factory(App\Models\Price::class)->create();
+
+
+
+        if (!empty($request->price))
+        {
+            foreach ($request->price as $key => $item)
+            {
+                $productPrice = new ProductVariant();
+                $productPrice->price = $item;
+                $productPrice->product_id = $product->id;
+                $product->prices()->save($productPrice);
+            }
+        }
+
+        $user->save();
+        $profile = $user->profile()->save($profile);
+        $address = $user->address()->save($address);
+
+
+       <td colspan="3">
+                <a href="#" id="{!! $product->id !!}" class="publish">
+                 &nbsp;   <img id="publish-image-{!! $product->id !!}" src="{!! url('/assets/images') !!}/{!! ($product->is_published) ? 'publish.png' : 'not_publish.png'  !!}"/>
+                </a>
+            </td>
+
+
+
+
+
+
+<a href="{{ url(getLang().'/product/'.$product->slug .'/show') }}"><h1>link</h1></a>
+
+<a href="{{ url(getLang().'/product/'.$product->id.'-'.Str::slug($product->name).'/show') }}"><h1>link</h1></a>
+
+{!! nl2br($product->details) !!}
+
+{{ str_limit($product->name,30,' ...') }}
+
+ {{ str_limit(htmlspecialchars_decode(strip_tags($product->details)),45,' ...') }}
+
+
+
+    public function show($id, $slug = Null)
+    {
+
+        $product = Product::findBySlugOrIdOrFail($id);
+        $product_categories = $product->categories()->lists('id')->toArray();
+
+
+//        $user->pharmacies()->updateExistingPivot($pharmacy->id, ['preferred' => 1]);
+      $similair = Category::find($product_categories[array_rand($product_categories)])->products()->whereNotIn('id', array($id))->orderByRaw("RAND()")->take(6)->get();
+        helperFunctions::getPageInfo($sections,$cart,$total);
+
+        return view('frontend.shop.product', compact('sections', 'prices', 'product', 'similair', 'cart', 'total'));
+
+    }
+    public function show($id)
+    {
+        $product = $this->product->findWithoutFail($id);
+
+        if (empty($product))
+        {
+            Flash::error('Product not found');
+
+            return redirect(route(getLang() . '.admin.products.index'));
+        }
+
+        $product->prices = Price::get($product->id,['price', 'quantity', 'sku', 'upc'])->toArray();
+
+
+        if (!empty($product->price)){
+            foreach ($product->prices as $price) {
+
+            }
+        }
+        if (empty($product))
+        {
+            Flash::error('Product not found');
+        }
+
+        return view('backend.products.show')->with('product', $product);
+    }
+
+
+
+
+
+&nbsp;
+$products()->get()->toArray();
+
+$product = App\Models\Product::first()->toArray();
+
+
+$product->save($prices);
+
+>>> $prices->save();
+PHP error:  Undefined variable: prices on line 1
+>>> $product->prices()->save($prices);
+
+
+
+$product->prices()->save($prices);
+
+
+
+$product = App\Models\Product::first();
+$product->prices()->get()->toArray();
+
+
+
+$product->price =  new App\Models\Price;
+
+
+
+--- ✄ -----------------------
+$productprice = new app\models\price();
+
+--- ✄ -----------------------
+
+$productprice = App\Models\Product::first();
+
+$productprice = new App\Models\Price;
+$productprice->price = '125';
+$productprice->model = 'model';
+$productprice->sku = 'm-id';
+$productprice->upc = '1234567891011';
+$productprice->quantity = '131';
+$productprice->detials = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+
+$product->prices()->save($productprice);
+
+
+
+$product->price->price = '125.33';
+$product->price->model = 'model';
+$product->price->sku = 'm-id';
+$product->price->upc = '1234567891011';
+$product->price->quantity = '131';
+$product->price->detials = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+
+$productprices->save();
+
+$product->products()->save($productprices);
+
+
+$productprices->save();
+
+$product->prices()->save();
+
+$products = App\Models\Product::all()->toArray();
+$products->prices = App\Models\Price::all()->toArray();
+
+$products->save();
+
+App\Models\Product::count();
+App\Models\price::count();
+
+App\Models\Product::whereHas(App\Models\price::count());
+
+App\Models\Price::create([
+'price' => '125.33',
+'quantity' => '125',
+'model' => 'model',
+'sku' => 'M-1259933',
+'upc' => '1200000000000',
+'detials' => '',
+
+
+ ]);
+
+
+ $products = App\Models\Product::whereHas('product.prices' , function($query) {    $query->where('price_id', 1); })->where('product_id', $productID)->get();
+
+
+//$factory->define(App\Models\PriceProduct::class, function (Faker\Generator $faker) {
+//    return [
+//        'price_id' =>  function () {
+//            return factory(App\Models\Price::class)->create()->id;
+//        } ,
+//        'product_id' =>  function () {
+//            return factory(App\Models\Product::class)->create()->id;
+//        }
+//    ];
+//});
+
+
+//    $categoryId = isset($attributes['category_id']) ? $attributes['category_id']: factory(\App\Models\Category::class)->create()->id;
+//return array(
+//    'status' => $faker->status,
+//    'category_id' =>  $category[rand(0, count($category) -1)], true, 'Faker'),
+
+
+factory(App\Models\Product::class, 10)->create();
+
+
+factory(\App\Models\Price::class)->create();
+factory(\App\Models\PriceProduct::class)->create();
+factory(App\Models\Price::class)->make();
+factory(\App\Models\PriceProduct::class)->make();
+
+$pp = factory(App\Models\PriceProduct::class, 'product', 3)->make();
+
+$factory->define(App\Models\PriceProduct::class, function ($faker) {
+    return [
+
+        'price_id' => factory(App\User::class)->create()->id,
+        'product_id' => factory(App\Post::class)->create()->id,
+    ];
+});
+
+
+$products = factory(App\Models\Product::class, 3)->create()->each(function($u) {$u->prices()->save(factory(App\Models\Price::class)->make(), $u->priceProduct()->save(factory(App\Models\PriceProduct::class)->make() });
+
+
+ factory(App\Product::class, 10)->create();
+        factory(App\User::class, 10)->create()->each(function($u)
+        {
+            $u->cart()->save(factory(App\Cart::class)->create()->each(function($c)
+            {
+                $ids = App\Product::lists('id')->toArray();
+                $c->products()->sync($ids);
+            }));
+        });
+
+
+
+
+
+
+
+
+
+$prices->save();
+
+--- ✄ -----------------------
+http://stackoverflow.com/questions/25701352/why-isnt-my-laravel-model-relationship-saving
+
+
+--- ✄ -----------------------
+
+$user = new User;
+$user -> email = $newEmail;
+$user -> name = $newName;
+$user -> username = $newUsername;
+$user -> password = Hash::make($newPassword);
+$user -> avatars -> gravatar  = $gravatar;
+$user -> push();
+
+--- ✄ -----------------------
+change to
+--- ✄ -----------------------
+
+
+				$avatar = new Avatar;
+				$avatar -> gravatar = 'gravatar.com/avatar/'.md5($newEmail);
+
+				$user = new User;
+				$user -> email = $newEmail;
+				$user -> name = $newName;
+				$user -> username = $newUsername;
+				$user -> password = Hash::make($newPassword);
+
+				$user -> save();
+				$user -> avatars() -> save($avatar);
+--- ✄ -----------------------
+
+$category->articles()->saveMany(Article::find([article_list])
+
+
+
+$category->articles()->sync($array_of_article_ids);
+
+
+use Article::findMany($array_of_article_ids);
+
+
+
+
+
+Of course it returns a collection. Use
+$articles->toArray();
+
+to get an array of
+
+$articles->lists('id');
+
+to get an array of articles ids.
+
+
+
+
+
+$comments = [
+    new Comment(['message' => 'A new comment.']),
+    new Comment(['message' => 'Another comment.']),
+    new Comment(['message' => 'The latest comment.'])
+];
+
+$post = Post::find(1);
+
+$post->comments()->saveMany($comments);
+
+$route = Route::current();
+$name = Route::currentRouteName();
+$action = Route::currentRouteAction();
+
+php artisan generate:modelfromtable --table=products,prices,product_variants,options,option_values,product_features --folder=app\\Temp
+
+
+php artisan generate:modelfromtable --all --folder=app\\All
+
+$product->save($prices);
+
+>>> $prices->save();
+PHP error:  Undefined variable: prices on line 1
+>>> $product->prices()->save($prices);
+
+
+
+$product->prices()->save($prices);
+
+//    $products = array_pluck(\App\Models\Product::all(), 'id');
+//    $product =  App\Models\Product::first();
+    //$users = array_pluck(App\User::all(), 'id');
+//$faker->randomElement($users),
+
+where is
+=>
+'field' is $requested->from->field;
+
+
+factory(App\Models\Cart::class)->make();
+
+
+
+factory(App\Models\Price::class)->create();
+factory(App\Models\Product::class)->create();
+factory(App\Models\PriceProduct::class)->create();
+
+factory(App\Models\Price::class)->create(['price' => '3465.55']);
+
+
+$faker->randomElement($users),
+
+      //  'office_status' =>  $faker->name($office_status = 'Draft'|'Review'|'inDesign'|'inProof'|'inProcess'|'Hidden'|'Deleted'| 'Live'|'Removed'),
+      //  'availability' => $faker->name($availability = 'Available'|'InStock'|'OnHold'|'OnBackorder'|'PreOrders'|'PromoActive'|'SoldOut'|'Discontinued'),
+
+
+  $category = array_pluck(App\Models\Category::all(), 'id');
+  'category_id' =>  $faker->randomElement($category),
+
+$status = ['Online','Offline','Removed', 'Archived','Discontinued']
+$office_status = ['Draft','Review','inDesign','inProof','inProcess','Hidden','Deleted', 'Live','Removed']
+$availability = ['Available','InStock','OnHold','OnBackorder','PreOrders','PromoActive','SoldOut','Discontinued']
+
+//$products = factory(App\Models\Product::class, 3)
+//    ->create()
+//    ->each(function($u) {
+//        $u->prices()->save(factory(App\Models\Price::class)->make(),
+//        $u->priceProduct()->save(factory(App\Models\PriceProduct::class)->make()
+//    });
+
+//$users = \App\Models\User::all()->toArray();
+
+//$factory->defineAS(App\Models\PriceProduct::class, 'product',function ($faker) {
+//    $product = $factory->raw(App\Models\Product::class);
+//    return [
+//
+//        'price_id' => factory(App\Models\Price::class)->create()->id,
+//        'product_id' => factory(App\Models\Product::class)->create()->id,
+//    ];
+//});
+
+
+
+
+
+
+
+
+public function getPublishedAttribute($value)
+    {
+    if($value =="") return false;
+    return true;
+    }
+
+
+    echo $bool_val ? 'true' : 'false';
+
+
+    $apartments = Apartment::whereHas('building.agent' , function($query) {    $query->where('agent_id', 35); })->where('building_id', $buildingID)->get();
+
+
+public function getExpireOnAttribute($value)
+{
+    return $this->pivot->expire_on;  // use it like you want
+}
+
+
+
+store :
+
+$item = Model::create($request->all());
+$item->model2()->create($request->all());
+update:
+
+$item = Model::findOrFail($id);
+$item->update($request->all());
+$item->model2->update($request->all());

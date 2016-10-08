@@ -1,0 +1,97 @@
+{
+	"modelLabel": "Products",
+	"tableName": "products",
+	"skipMigration": false,
+	"skipModel": false,
+	"skipController": false,
+	"skipViews": false,
+	"fields": [{
+		"name": "name",
+		"validations": "required",
+		"type": {
+			"db": "string",
+			"ui": "text"
+		},
+		"modifiers": "",
+		"foreignKey": "",
+		"index": "none",
+		"hideInListings": false
+	}, {
+		"name": "details",
+		"validations": "",
+		"type": {
+			"db": "textarea",
+			"ui": "text"
+		},
+		"modifiers": "",
+		"foreignKey": "",
+		"index": "none",
+		"hideInListings": false
+	}, {
+		"name": "manufacturer",
+		"validations": "",
+		"type": {
+			"db": "string",
+			"ui": "text"
+		},
+		"modifiers": "default,'The Grace Company'",
+		"foreignKey": "",
+		"index": "none",
+		"hideInListings": false
+	}, {
+		"name": "thumbnail",
+		"validations": "",
+		"type": {
+			"db": "string",
+			"ui": "file"
+		},
+		"modifiers": "nullable",
+		"foreignKey": "",
+		"index": "none",
+		"hideInListings": false
+	}, {
+		"name": "thumbnail2",
+		"validations": "",
+		"type": {
+			"db": "string",
+			"ui": "file"
+		},
+		"modifiers": "nullable",
+		"foreignKey": "",
+		"index": "none",
+		"hideInListings": false
+	}, {
+		"name": "thumbnail3",
+		"validations": "",
+		"type": {
+			"db": "string",
+			"ui": "file"
+		},
+		"modifiers": "nullable",
+		"foreignKey": "",
+		"index": "none",
+		"hideInListings": false
+	}, {
+		"name": "is_published",
+		"validations": "",
+		"type": {
+			"db": "boolean",
+			"ui": "checkbox"
+		},
+		"modifiers": "",
+		"foreignKey": "",
+		"index": "none",
+		"hideInListings": false
+	}, {
+		"name": "status",
+		"validations": "",
+		"type": {
+			"db": "string",
+			"ui": "select:['available' => 'Available', 'onhold' => 'OnHold', 'online' => 'Online', 'offline' => 'Offline', 'removed' => 'Removed', 'archived' => 'Archived', 'onbackorder' => 'OnBackorder', 'soldout' => 'SoldOut', 'discontinued' => 'Discontinued'], 'available'"
+		},
+		"modifiers": "",
+		"foreignKey": "",
+		"index": "none",
+		"hideInListings": false
+	}]
+}

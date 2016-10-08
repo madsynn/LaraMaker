@@ -1,0 +1,420 @@
+**Ok i have been working on trying to figure this out for a few weeks now so I thought I would ask for advice.**
+
+The problem I am having is in the store function in the controller and the  retrieval of the prices for each product.
+I have all my others storing just fine but the pricing seems to be eluding me.
+I cannot get them to save to the database or pull the data in the view on the front-end.
+
+Format I have tried using for retrieving prices on the single-product.blade.php is as follows.
+I have tried retrieval in a foreach loop and without. I have tried blade injecting the pricing also but I cannot seem to see the problem.
+
+Any help would be greatly appreciated.
+
+```
+{!! $product->prices->price !!}
+{!! $product->prices->quantity !!}
+{!! $product->prices->model !!}
+{!! $product->prices->sku !!}
+{!! $product->prices->upc !!}
+{!! $product->prices->details !!}
+```
+
+**I have 8 tables:**
+
+1. products
+2. product_features
+3. product_variations
+4. options
+5. option_value
+6. prices
+7. combos
+8. combo_product
+
+So far I have them all working except prices and combos.
+
+TABLES:
+
+> prices, products, price_product, combos
+
+```mysql
+Schema::create('prices', function (Blueprint $table)
+        {
+            $table->increments('id');
+            $table->integer('product_id')->unsigned()->index();
+            $table->decimal('price', 11, 2)->nullable();
+            $table->string('model', 12)->nullable();
+            $table->string('sku', 12);
+            $table->string('upc', 13);
+            $table->integer('quantity');
+            $table->text('detials');
+            $table->timestamps();
+            $table->softDeletes();
+            $table->engine = 'InnoDB';
+            $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade');
+        });
+
+        Schema::create('products', function (Blueprint $table)
+        {
+            $table->increments('id');
+            $table->string('status')->nullable();
+            $table->string('office_status')->nullable();
+            $table->string('availability')->default('Available');
+            $table->string('slug')->nullable();
+            $table->boolean('ispromo')->default(0);
+            $table->boolean('is_published')->default(1);
+            $table->string('name')->nullable();
+            $table->string('subtitle')->nullable();
+            $table->string('manufacturer');
+            $table->longText('details');
+            $table->longText('description');
+            $table->string('thumb')->nullable();
+            $table->string('photo_album')->nullable();
+            $table->dateTime('pubished_at')->index();
+        });
+
+Schema::create('price_product', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('price_id');
+            $table->unsignedInteger('product_id');
+
+            $table->timestamps();
+            $table->engine = 'InnoDB';
+            $table->primary(['price_id', 'product_id']);
+            $table->foreign('price_id')->references('id')->on('prices')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade');
+
+        });
+
+        Schema::create('combos', function (Blueprint $table)
+        {
+            $table->increments('id');
+            $table->string('status')->nullable();
+            $table->string('office_status')->nullable();
+            $table->string('availability')->default('Available');
+            $table->decimal('combo_price', 11, 2)->nullable();
+            $table->integer('number_included_products')->nullable();
+            $table->string('upc', 13)->nullable();
+            $table->string('sku')->nullable();
+            $table->string('name')->nullable();
+            $table->string('subtitle')->nullable();
+            $table->string('manufacturer');
+            $table->longText('details');
+            $table->longText('description');
+            $table->string('slug')->nullable();
+            $table->boolean('ispromo')->default(0);
+            $table->boolean('is_published')->default(1);
+
+            $table->timestamps();
+            $table->softDeletes();
+            $table->engine = 'InnoDB';
+        });
+
+        Schema::create('combo_product', function (Blueprint $table)
+        {
+            $table->increments('id');
+            $table->decimal('price', 11, 2)->nullable();
+            $table->string('sku');
+            $table->string('upc', 13);
+            $table->longText('details');
+            $table->integer('product_id')->unsigned()->index();
+            $table->integer('combo_id')->unsigned()->index();
+            $table->timestamps();
+            $table->engine = 'InnoDB';
+            $table->primary(['combo_id', 'product_id']);
+            $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('combo_id')->references('id')->on('combos')->onUpdate('cascade')->onDelete('cascade');
+        });
+```
+
+> Model: price.php
+
+```
+    protected $guarded = ['id'];
+    protected $table = 'prices';
+    public $fillable = [
+        'product_id',
+        'price',
+        'model',
+        'sku',
+        'upc',
+        'quantity',
+        'details',
+        'created_at',
+        'updated_at'
+    ];
+    protected $casts = [
+        'product_id' => 'integer',
+        'price'      => 'string',
+        'model'      => 'string',
+        'sku'        => 'string',
+        'upc'        => 'string',
+        'quantity'   => 'string',
+        'details'   => 'string'
+    ];
+    public static $rules = ['price' => 'required'];
+    public function getPriceAttribute($price) {return '$' . number_format($price, 2, '.', ''); }
+    public function products() {return $this->belongsToMany(Product::class, 'price_product'); }
+    public function product() {return $this->belongsTo(Product::class, 'price_product'); }
+```
+
+> Model: product.php
+
+```
+    protected $table = 'products';
+    protected $guarded = ['id'];
+    protected $fillable = ['id', 'slug', 'ispromo', 'is_published', 'name', 'details',         'description', 'status', 'thumbnail', 'thumbnail2', 'photo_album', 'pubished_at', 'manufacturer', 'subtitle', 'office_status', 'availability'];
+   protected $casts = [
+       'slug'              => 'string',
+       'ispromo'           => 'boolean',
+       'is_published'      => 'boolean',
+       'availability'      => 'string',
+       'manufacturer'      => 'string',
+       'status'            => 'string',
+       'office_status'     => 'string',
+       'name'              => 'string',
+       'subtitle'          => 'string',
+       'details'           => 'string',
+       'description'       => 'string',
+       'thumb'         => 'string',
+       'photo_album'       => 'string'
+   ];
+    public function photos() {return $this->hasMany(AlbumPhoto::class); }
+    public function options() {return $this->hasMany(Option::class); }
+    public function price() {return $this->belongsToMany(Price::class, 'price_product'); }
+    public function prices() {return $this->belongsToMany(Price::class, 'price_product'); }
+    public function productVariants() {return $this->hasMany(ProductVariant::class); }
+    public function productFeatures() {return $this->hasMany(ProductFeature::class); }
+    public function combo() {return $this->belongsToMany(Combo::class, 'combo_product'); }
+
+```
+
+    > ProductController.php
+
+```
+namespace App\Http\Controllers;
+use App\Models\ComboProduct;
+use App\Models\Combo;
+use App\Models\PriceProduct;
+use App\Repositories\Category\CategoryInterface;
+use App\Repositories\Category\CategoryRepository;
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+use App\Models\Product;
+use App\Models\CategoryProduct;
+use App\Models\AlbumPhoto;
+use App\Models\Section;
+use App\Models\Cart;
+use App\Models\Option;
+use App\Models\OptionValue;
+use App\Models\ProductFeature;
+use App\Models\ProductVariant;
+use App\Models\OrderProduct;
+use App\Models\Price;
+use App\Models\Category;
+
+
+class ProductController extends Controller
+{
+    protected $product;
+    protected $category;
+    protected $sections;
+    protected $prices;
+
+    public function __construct(Product $product, Section $sections, CategoryInterface $category, Price $prices)
+    {
+        $this->product = $product;
+        $this->category = $category;
+        $this->section = $sections;
+        $this->price = $prices;
+    }
+
+    public function index()
+    {
+
+    }
+
+    public function show($id, $slug = Null)
+    {
+    }
+
+    protected function flatten($array)
+    {
+        $result = [];
+        foreach($array as $key=>$value) {
+            if (is_array($value)) {
+                $result = $result + $this->flatten($value, $key);
+            } else {
+                $result[$key] = $value;
+            }
+        }
+        return $result;
+    }
+
+    public function store(Request $request)
+    {
+
+        $this->validate($request, [
+            'name' => 'required',
+            'manufacturer' => 'required',
+            'price' => 'required',
+            'details' => 'required',
+            'quantity' => 'required',
+            'categories' => 'required',
+            'thumb' => 'required|image',
+        ]);
+
+         if ($request->hasFile('album')) {
+            foreach ($request->album as $photo) {
+                if ($photo && strpos($photo->getMimeType(), 'image') === false) {
+                    return \Redirect()->back();
+                }
+            }
+        }
+
+        $dest = "content/images/";
+
+        if (!empty($product['thumb'])) {
+            $name = str_random(11)."_".$request->file('thumb')->getClientOriginalName();
+            $request->file('thumb')->move($dest, $name);
+            $product = $request->all();
+            $product['thumb'] = "/" . $dest . $name;
+        }
+
+        $product = Product::create($product);
+
+      /**
+         * Upload Album Photos
+         */
+        if ($request->hasFile('album')) {
+            foreach ($request->album as $photo) {
+                if ($photo) {
+                    $name = str_random(11) . "_" . $photo->getClientOriginalName();
+                    $photo->move($dest, $name);
+                    AlbumPhoto::create([
+                        'product_id' => $product->id,
+                        'photo_src' => "/" . $dest . $name
+                    ]);
+                }
+            }
+        }
+
+
+        /**
+         * Linking the categories to the product
+         */
+        foreach ($request->categories as $category_id)
+        {
+            CategoryProduct::create(['category_id' => $category_id, 'product_id' => $product->id ]);
+        }
+
+        if (!empty($request->price))
+        {
+           foreach ($request->prices as $price)
+           {
+               $productPrice = new Price();
+               $productPrice->price = $price;
+               $productPrice->quantity = $price;
+               $productPrice->model = $price;
+               $productPrice->sku = $price;
+               $productPrice->upc = $price;
+               $productPrice->product_id = $product->id;
+
+ //$productPricing = $request->input('products.0.prices.0.price');
+                    // $productPricing = $request->input('price');
+                    // $productPricing = $request->input('quantity');
+                    // $productPricing = $request->input('model');
+                    // $productPricing = $request->input('sku');
+                    // $productPricing = $request->input('upc');
+
+               $product->prices()->save($productPrice);
+           }
+        }
+
+
+        /**
+         * Linking the options to the product
+         */
+        if ($request->has('options')) {
+            foreach ($request->options as $option_details) {
+                if (!empty($option_details['name']) && !empty($option_details['values'][0])) {
+                    $option = Option::create([
+                                'name' => $option_details['name'],
+                                'product_id' => $product->id
+                    ]);
+                    foreach ($option_details['values'] as $value) {
+                        OptionValue::create([
+                            'value' => $value,
+                            'option_id' => $option->id
+                        ]);
+                    }
+                }
+            }
+        }
+
+        if (!empty($request->attribute_name)) {
+            foreach ($request->attribute_name as $key => $item) {
+                $productVariant = new ProductVariant();
+                $productVariant->attribute_name = $item;
+                $productVariant->product_attribute_value = $request->product_attribute_value[$key];
+                $product->productVariants()->save($productVariant);
+            }
+        }
+
+        if (!empty($request->feature_name)) {
+            foreach ($request->feature_name as $feature) {
+                $productFeature = new ProductFeature();
+                $productFeature->feature_name = $feature;
+                $product->productFeatures()->save($productFeature);
+
+            }
+        }
+
+        $product->save();
+
+
+        FlashAlert()->success('Success!', 'The Product Was Successfully Added');
+
+        return \Redirect(getLang().'/admin/products');
+    }
+
+    private function getProductVariants($variants = [])
+    {
+        if (isset($variants))
+        {
+            $variants = array_map(
+                function ($v)
+                {
+                    return explode(':', $v);
+                },
+                explode(',', $variants)
+            );
+        }
+        return $variants;
+    }
+
+    private function getProductFeatures($features = [])
+    {
+        if (isset($features)) {
+            $features = array_map(
+                function ($v) {
+                    return explode(':', $v);
+                },
+                explode(',', $features)
+            );
+        }
+        return $features;
+    }
+
+    private function getPrices($prices = [])
+    {
+        if (isset($prices)) {
+            $prices = array_map(
+                function ($v) {
+                    return explode(':', $v);
+                },
+                explode(',', $prices)
+            );
+        }
+        return $prices;
+    }
+```

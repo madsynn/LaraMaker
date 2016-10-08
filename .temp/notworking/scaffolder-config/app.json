@@ -1,0 +1,34 @@
+// {
+//     "name": "Grace",
+//     "userInterface": {
+//         "pageTitle": "Products",
+//         "theme": {
+//             "primaryColor": "red",
+//             "accentColor": "blue"
+//         }
+//     },
+//     "paths": {
+//         "migrations": "base:database/migrations/",
+//         "models": "app:Models/",
+//         "repositories": "app:Libraries/Repositories/",
+//         "controllers": "app:Http/Controllers/",
+//         "views": "base:resources/views/",
+//         "assets": "base:public/",
+//         "routes": "app:Http/routes.php"
+//     },
+//     "namespaces": {
+//         "models": "App\\Models",
+//         "repositories": "App\\Libraries\\Repositories",
+//         "controllers": "App\\Http\\Controllers"
+//     },
+//     "inheritance": {
+//         "controller": "App\\Controller\\AppBaseController",
+//         "model": "Illuminate\\Database\\Eloquent\\Model"
+//     },
+//     "routing": {
+//         "prefix": "admin"
+//     },
+//     "api": {
+//         "domain": "api.scaffolder"
+//     }
+// }

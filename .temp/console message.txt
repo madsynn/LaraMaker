@@ -1,0 +1,18 @@
+
+$this->comment('==================================================');
+$this->comment(' ');
+$this->comment('        | NEW CRUD PACKAGE CONTAINING |');
+$this->comment(' ');
+$this->comment('==================================================');
+$this->comment(' ');
+$this->comment('=============================================================================');
+$this->comment('         IF YOU ADDED A ENUM FIELD YOU NEED OT ADD OPTIONS TO IT  ');
+$this->comment('         BEFORE YOU MIGRATE TEH NEW TABLES TO THE DATABASE. OTHERWISE ');
+$this->comment('         SIMPLY SELECT YES.  ');
+$this->comment(' ');
+$this->comment(' ');
+	if ($this->confirm("\nDo you want to migrate database? [y|N]", false)) {
+	  $this->call('migrate');
+	}
+$this->comment(' ');
+$this->comment('=============================================================================');

@@ -1,0 +1,175 @@
+// factory(App\Models\Product::class, 5)->create()->each(function($u) {
+//     $u->categoryProducts()->save(factory(App\Models\CategoryProduct::class)->make());
+//     $u->productPrices()->save(factory(App\Models\Price::class)->make());
+//   });
+//
+//    factory(App\Models\Product::class, 5)->create()->each(function($u) {$u->categoryProducts()->save(factory(App\Models\CategoryProduct::class)->make()); $u->productPrices()->save(factory(App\Models\Price::class)->make()); });
+
+
+factory(App\Models\Product::class, 5)->create()->each(function($u) {$u->category_products()->save(factory(App\Models\CategoryProduct::class)->make()); $u->productPrices()->save(factory(App\Models\Price::class)->make()); });
+
+
+
+
+factory(App\Models\Product::class, 5)->create()
+->each(function($u)
+{
+    $u->category_products()->save(factory(App\Models\CategoryProduct::class)->make());
+    $u->productPrices()->save(factory(App\Models\Price::class)->make());
+    }
+    );
+
+factory(App\Models\Product::class, 5)->create()
+->each(function($u)
+{
+    $u->category_products()->save(factory(App\Models\CategoryProduct::class)->make());
+
+});
+
+factory(App\Models\Product::class, 5)->create()->each(function($u) {$u->category_products()->save(factory(App\Models\CategoryProduct::class)->make()); });
+
+
+
+
+
+
+$table->decimal('amount', 5, 2);
+
+
+select:['available' => 'Available', 'onhold' => 'OnHold', 'online' => 'Online', 'offline' => 'Offline', 'removed' => 'Removed', 'archived' => 'Archived', 'onbackorder' => 'OnBackorder', 'soldout' => 'SoldOut', 'discontinued' => 'Discontinued']
+
+
+
+
+
+
+$factory->define(App\Models\Price::class, function (Faker\Generator $faker) {
+    $data = collect($array['products']);
+    var_dump($data);
+    $products =  App\Models\Product::all();
+    $product = array_pluck($array['users'],'id');
+    var_dump($product);
+    $product_id = $product->id;
+    $product_name = $product->name;
+
+
+//    $product_id = $faker->randomElement($product);
+//  $product_name = $faker->randomElement($product);
+    var_dump($product_name);
+    return [
+        'product_id' =>  $product_id,
+        'title' =>  $product_id->name,
+        'price' => $faker->randomFloat(2, 100, 500),
+        'model' =>  $faker->word,
+        'sku' => $faker->bothify('??-##??-####'),
+        'upc' => '636343 ' . str_random(6),
+        'quantity' =>  $faker->numberBetween(6, 774),
+        'alt_details' =>  $faker->word,
+
+    ];
+});
+
+
+str_slug($name .),
+
+fzaninotto/Faker Multiple Factory
+
+
+public function run()
+{
+  factory(App\User::class, 2)->create()->each(function($u) {
+    $u->issues()->save(factory(App\Issues::class)->make());
+  });
+}
+
+$factory->define(App\Models\Product::class, function (Faker\Generator $faker, $attributes=array())
+
+                 {
+                     $productCatInstance =
+                        $factory->define(App\Models\CategoryProduct::class, function (Faker\Generator $faker) {
+                            $product = array_pluck(\App\Models\Product::all(),'id');
+                            $category = array_pluck(\App\Models\Category::all(),'id');
+                            return [
+                                'category_id' =>  $faker->randomElement($category),
+                                'product_id' => $faker->randomElement($product)
+                        });
+
+                         use($productCatInstance)
+                        // $productCatInstance = app(App\Models\CategoryProduct::class);
+                        $status = ['Online','Offline','Removed', 'Archived','Discontinued'];
+                        $office_status = ['Draft','Review','inDesign','inProof','inProcess','Hidden','Deleted', 'Live','Removed'];
+                        $availability = ['Available','InStock','OnHold','OnBackorder','PreOrders','PromoActive','SoldOut','Discontinued'];
+                        $name = $faker->catchPhrase;
+                        //$sampleData = $productCatInstance;
+
+
+                        return [
+                             'status' => $faker->randomElement($status),
+                            'office_status' =>  $faker->randomElement($office_status),
+                            'availability' => $faker->randomElement($availability),
+                            'slug' =>  Str::slug($name),
+                            'ispromo' =>  $faker->boolean($chanceOfGettingTrue = 50),
+                            'is_published' =>  $faker->boolean($chanceOfGettingTrue = 50),
+                            'name' =>  $name,
+                            'subtitle' =>  $faker->word ,
+                            'manufacturer' =>  $faker->word ,
+                            'details' =>  $faker->paragraph,
+                            'description' =>  $faker->paragraph,
+                            'thumbnail' =>  $faker->imageUrl(600, 480),
+                            'thumbnail2' =>  $faker->imageUrl(600, 600, 'business', true, 'Faker'),
+                            'photo_album' =>  $faker->imageUrl(600, 480),
+                            'pubished_at' =>  $faker->dateTimeBetween() ,
+                            'video_url' =>  $faker->word ,
+                            'meta_title' =>  $faker->word ,
+                            'meta_description' =>  $faker->word ,
+                            'facebook_title' =>  $faker->word ,
+                            'google_plus_title' =>  $faker->word ,
+                            'twitter_title' =>  $faker->word ,
+                            'lang' =>  'en',
+                            'created_at' => Carbon::now(),
+                            'updated_at' => Carbon::now(),
+                        ];
+                    });
+
+                    https://placehold.it/800x480/B91106/FFFFFF?text=doh!!
+
+                    https://placehold.it/800x600/1A5276/FFFFFF?text=placeholder+image
+
+
+                         <div class="slide" data-thumb="http://placehold.it/413/468B4E/FFFFFF" aria-hidden="true" style="width: 413px; float: left; display: block;">
+                            <a href="http://placehold.it/720x960/468B4E/FFFFFF?text=image+three" title="{!! $product->name !!}" data-lightbox="">
+                                <img src="http://placehold.it/720x960/468B4E/FFFFFF?text=image+three" alt="{!! $product->name !!} image" draggable="false">
+                            </a>
+                        </div>
+
+$product = App\Models\Product::latest();
+
+
+
+@if($product->thumbnail)
+    <div class="slide" data-thumb="{!! $product->thumbnail !!}" style="width: 413px; float: left; display: block;">
+        <a href="{!! $product->thumbnail !!}" title="{!! $product->name !!} - Front View" data-lightbox="gallery-item">
+            <img src="{!! $product->thumbnail !!}" alt="{!! $product->name !!} image" draggable="false">
+        </a>
+    </div>
+@else
+    <div class="slide" data-thumb="http://placehold.it/413" aria-hidden="true" style="width: 413px; float: left; display: block;">
+        <a href="http://placehold.it/720x960?text=image+one" title="{!! $product->name !!}" data-lightbox="">
+            <img src="http://placehold.it/720x960?text=image+two" alt="{!! $product->name !!} image" draggable="false">
+        </a>
+    </div>
+@endif
+
+@if($product->thumbnail)
+    <div class="slide" data-thumb="{!! $product->thumbnail2 !!}" style="width: 413px; float: left; display: block;">
+        <a href="{!! $product->thumbnail2 !!}" title="{!! $product->name !!} - Front View" data-lightbox="gallery-item">
+            <img src="{!! $product->thumbnail2 !!}" alt="{!! $product->name !!} image" draggable="false">
+        </a>
+    </div>
+@else
+    <div class="slide" data-thumb="http://placehold.it/413" aria-hidden="true" style="width: 413px; float: left; display: block;">
+        <a href="http://placehold.it/720x960?text=image+two" title="{!! $product->name !!}" data-lightbox="">
+            <img src="http://placehold.it/720x960?text=image+two" alt="{!! $product->name !!} image" draggable="false">
+        </a>
+    </div>
+@endif

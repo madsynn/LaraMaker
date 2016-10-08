@@ -1,0 +1,97 @@
+{
+	"modelLabel": "Prices",
+	"tableName": "prices",
+	"skipMigration": false,
+	"skipModel": false,
+	"skipController": false,
+	"skipViews": false,
+	"fields": [{
+		"name": "price_id",
+		"validations": "",
+		"type": {
+			"db": "integer",
+			"ui": "number"
+		},
+		"modifiers": "unsigned",
+		"foreignKey": "product_id:products:belongsto",
+		"index": "none",
+		"hideInListings": false
+	}, {
+		"name": "price",
+		"validations": "",
+		"type": {
+			"db": "decimal",
+			"ui": "number"
+		},
+		"modifiers": "nullable",
+		"foreignKey": "",
+		"index": "none",
+		"hideInListings": false
+	}, {
+		"name": "title",
+		"validations": "",
+		"type": {
+			"db": "string",
+			"ui": "text"
+		},
+		"modifiers": "nullable",
+		"foreignKey": "",
+		"index": "none",
+		"hideInListings": false
+	}, {
+		"name": "model",
+		"validations": "",
+		"type": {
+			"db": "string",
+			"ui": "text"
+		},
+		"modifiers": "nullable",
+		"foreignKey": "",
+		"index": "none",
+		"hideInListings": false
+	}, {
+		"name": "sku",
+		"validations": "",
+		"type": {
+			"db": "string",
+			"ui": "text"
+		},
+		"modifiers": "nullable",
+		"foreignKey": "",
+		"index": "none",
+		"hideInListings": false
+	}, {
+		"name": "upc",
+		"validations": "",
+		"type": {
+			"db": "string",
+			"ui": "text"
+		},
+		"modifiers": "nullable",
+		"foreignKey": "",
+		"index": "none",
+		"hideInListings": false
+	}, {
+		"name": "quantity",
+		"validations": "",
+		"type": {
+			"db": "integer",
+			"ui": "number"
+		},
+		"modifiers": "nullable:unsigned",
+		"foreignKey": "",
+		"index": "none",
+		"hideInListings": false
+	}, {
+		"name": "alt_details",
+		"validations": "",
+		"type": {
+			"db": "text",
+			"ui": "textarea"
+		},
+		"modifiers": "",
+		"foreignKey": "",
+		"index": "none",
+		"hideInListings": false
+	}]
+}

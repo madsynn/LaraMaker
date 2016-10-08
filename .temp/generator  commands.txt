@@ -1,0 +1,10 @@
+php artisan infyom:api_scaffold User  --fromTable --tableName='users' --save
+
+php artisan infyom:api_scaffold User  --fieldsFile='User.json' --save
+
+php artisan infyom:scaffold Account --relations
+
+php artisan infyom:api_scaffold User  --fieldsFile='resources/model_schemas/User.json' --relations
+
+
+php artisan infyom:scaffold Account  --fromTable --tableName='accounts' --save

@@ -1,0 +1,109 @@
+/home/vagrant/gr/grace.reset/app/Http/Controllers/ProductController.php:244:
+array (size=29)
+  'status' => string 'Available' (length=9)
+  'manufacturer' => string 'The Grace Company' (length=17)
+  'office_status' => string 'Draft' (length=5)
+  'is_published' => string '1' (length=1)
+  'name' => string 'Product Name 814' (length=16)
+  'subtitle' => string 'subtitle goes here' (length=18)
+  'categories' => 
+    array (size=1)
+      0 => string '1' (length=1)
+  'features_heading' => string 'Feature Heading' (length=15)
+  'details' => string 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.' (length=105)
+  'productFeatures' => 
+    array (size=2)
+      0 => 
+        array (size=3)
+          'feature_name' => string 'feature' (length=7)
+          'useicon' => string '1' (length=1)
+          'icon' => string 'icon-caret-right' (length=16)
+      2 => 
+        array (size=3)
+          'feature_name' => string 'Feature 1' (length=9)
+          'useicon' => string 'on' (length=2)
+          'icon' => string 'icon-caret-right' (length=16)
+  'description' => string 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.' (length=293)
+  'video_url' => string '' (length=0)
+  'slug' => string 'slug-81' (length=7)
+  'photo' => 
+    array (size=1)
+      0 => 
+        array (size=6)
+          'caption' => string 'caption' (length=7)
+          'alt' => string 'alt-text' (length=8)
+          'photoinfo' => string 'info about image here' (length=21)
+          'use_main' => string '1' (length=1)
+          'use_thumb' => string '1' (length=1)
+          'use_gallery' => string '1' (length=1)
+  'prices' => 
+    array (size=3)
+      0 => 
+        array (size=7)
+          'title' => string 'Variable Price 81' (length=17)
+          'model' => string '81-qfnuj' (length=8)
+          'price' => string '3623293' (length=7)
+          'quantity' => string '193' (length=3)
+          'sku' => string '761286' (length=6)
+          'upc' => string '636343914145' (length=12)
+          'alt_details' => string 'alt-text' (length=8)
+      1 => 
+        array (size=7)
+          'title' => string 'Variable' (length=8)
+          'model' => string '81-qfnuj-9' (length=10)
+          'price' => string '353' (length=3)
+          'quantity' => string '758' (length=3)
+          'sku' => string '326529' (length=6)
+          'upc' => string '636343021275' (length=12)
+          'alt_details' => string '' (length=0)
+      2 => 
+        array (size=7)
+          'title' => string 'Variable' (length=8)
+          'model' => string '81-qfnuj-97' (length=11)
+          'price' => string '3239' (length=4)
+          'quantity' => string '42' (length=2)
+          'sku' => string '421060' (length=6)
+          'upc' => string '636343214411' (length=12)
+          'alt_details' => string '' (length=0)
+  'meta_title' => string '' (length=0)
+  'meta_keywords' => string '' (length=0)
+  'meta_description' => string '' (length=0)
+  'facebook_title' => string '' (length=0)
+  'google_plus_title' => string '' (length=0)
+  'twitter_title' => string '' (length=0)
+  'attribute_name' => 
+    array (size=1)
+      0 => string 'sdfsdfsdfsdf' (length=12)
+  'product_attribute_value' => 
+    array (size=1)
+      0 => string 'fffffff' (length=7)
+  'options' => 
+    array (size=1)
+      0 => 
+        array (size=2)
+          'name' => string 'sssss' (length=5)
+          'values' => 
+            array (size=1)
+              ...
+  'tracking' => string '' (length=0)
+  'datalayer' => string '' (length=0)
+  '_token' => string 'nFFUMfxw0iUGXH0wwp9y6kX3zyGqKSEg98XPsnfz' (length=40)
+  'thumbnail' => 
+    object(Symfony\Component\HttpFoundation\File\UploadedFile)[30]
+      private 'test' => boolean false
+      private 'originalName' => string 'chair-quilt_combo.jpg' (length=21)
+      private 'mimeType' => string 'image/jpeg' (length=10)
+      private 'size' => int 159007
+      private 'error' => int 0
+      private 'pathName' (SplFileInfo) => string '/tmp/phpZ4AYz0' (length=14)
+      private 'fileName' (SplFileInfo) => string 'phpZ4AYz0' (length=9)
+  'thumbnail2' => 
+    object(Symfony\Component\HttpFoundation\File\UploadedFile)[31]
+      private 'test' => boolean false
+      private 'originalName' => string 'IMG_1142-1000.jpg' (length=17)
+      private 'mimeType' => string 'image/jpeg' (length=10)
+      private 'size' => int 90672
+      private 'error' => int 0
+      private 'pathName' (SplFileInfo) => string '/tmp/phpTBCmxi' (length=14)
+      private 'fileName' (SplFileInfo) => string 'phpTBCmxi' (length=9)
+Redirecting to http://grace.reset/en/admin/products.

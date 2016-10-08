@@ -1,0 +1,128 @@
+
+
+
+
+App\User::find(1)->roles()->update($role, ['expires' => $expires]);
+
+For update, I just tried the code below and it worked.
+
+$pivotTableData = App\User::find(1)->roles[0]->pivot;
+$pivotTableData->expires = \Carbon\Carbon::now()->timestamp;
+$pivotTableData->save();
+
+$pivotTableData = App\Models\Product::find(1)->prices()->pivot;
+
+$pivotTableData = App\Models\Product::find(1)->prices[0]->pivot;
+$pivotTableData->save();
+
+
+
+$productId = 2; // Soya
+$cantidad = 1.1;
+
+Pedido::find($pedidoId)->products()->updateExistingPivot($productId, [
+    "cantidad" => $cantidad
+]);
+
+public function update($pedidoId, Request $request)
+{
+    dd($request->only('cantidad'));
+}
+
+products[$product->id]['name']
+
+$request->file('img_1')->move(public_path('images'), $request->file('img_1')->getClientOriginalName());
+
+
+$product = App\Models\Product::first();
+
+$products = App\Models\Product::all()->toArray();
+
+FK = Foreign Key btw, that's the key (1 column in this case) that holds the value of the relation to another table.
+
+
+ >>> $pedido = App\Pedido::first();
+=> <App\Pedido #000000007b69628c00000000512aa14f> {
+       id: "1",
+       user_id: "1",
+       restaurant_id: "2",
+       created_at: "2015-07-10 14:31:25",
+       updated_at: "2015-07-10 14:31:25",
+   }
+>>> $pedido->products()->get()->toArray();
+=> [
+       [
+           "id"         => "1",
+           "name"       => "Falafel",
+           "price"      => "90.0",
+           "created_at" => "2015-07-10 14:29:58",
+           "updated_at" => "2015-07-10 14:29:58",
+           "pivot"      => [
+               "pedido_id"  => "1",
+               "product_id" => "1",
+               "cantidad"   => "0.0",
+               "total"      => "0.0",
+               "created_at" => "2015-07-10 14:31:25",
+               "updated_at" => "2015-07-10 14:31:25"
+           ]
+       ],
+       [
+           "id"         => "2",
+           "name"       => "Soya",
+           "price"      => "90.0",
+           "created_at" => "2015-07-10 14:30:04",
+           "updated_at" => "2015-07-10 14:30:04",
+           "pivot"      => [
+               "pedido_id"  => "1",
+               "product_id" => "2",
+               "cantidad"   => "0.0",
+               "total"      => "0.0",
+               "created_at" => "2015-07-10 14:31:25",
+               "updated_at" => "2015-07-10 14:31:25"
+           ]
+       ],
+       [
+           "id"         => "4",
+           "name"       => "Humus",
+           "price"      => "66.0",
+           "created_at" => "2015-07-10 14:30:39",
+           "updated_at" => "2015-07-10 14:30:39",
+           "pivot"      => [
+               "pedido_id"  => "1",
+               "product_id" => "4",
+               "cantidad"   => "0.0",
+               "total"      => "0.0",
+               "created_at" => "2015-07-10 14:31:25",
+               "updated_at" => "2015-07-10 14:31:25"
+           ]
+       ]
+   ]
+
+
+
+
+
+$users = \App\Models\User::all()->toArray();
+
+$router->bind('Product', function($value){
+     return \App\Models\Product::where('id', $value)->orWhere('slug', $value)->first();
+});
+
+
+$products = factory(App\Models\Product::class, 3)->create()
+->each(function($u) {
+$u->prices()->save(factory(App\Models\Price::class)->make()),
+$u->priceProduct()->save(factory(App\Models\PriceProduct::class)->make())
+}  );
+
+
+
+
+        Schema::create('role_users', function (Blueprint $table) {
+            $table->integer('user_id')->unsigned();
+            $table->integer('role_id')->unsigned();
+            $table->nullableTimestamps();
+
+            $table->engine = 'InnoDB';
+            $table->primary(['user_id', 'role_id']);
+        });
