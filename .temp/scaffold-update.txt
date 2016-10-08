@@ -1,0 +1,46 @@
+
+
+
+scaffold:update
+Keep a running list of your model definitions
+
+There is now a scaffold:update command and it is very cool! In your config file, you will have an option to specify a "modelDefinitions" file, and in this you will place all of your model definitions. See below for an example.
+
+
+resource = true
+namespace = Oxford
+University hasMany Department string( name city state homepage ) -nt
+Department belongsTo University, hasMany Course string( name description ) number:integer
+resource = false
+Course belongsTo Department, hasMany Lesson string( name description ) integer( number credits ) -sd
+
+When you update this file and run php artisan scaffold:update it will check to see what has changed and update your models/migrations automatically! It will keep a "cache" file in the same directory as your models file to track the changes, so DO NOT EDIT IT! This allows the command to know if anything has been removed.
+
+
+Want to go even FURTHER with the scaffold process?!?! Setup foreman, add jrenton/laravel-scaffold to the require-dev section, setup an app file to copy from that adds the laravel scaffold service provider, setup a database file that sets up your database to copy from, and finally setup a models.txt file to copy from (example above). Save that scaffold file somewhere convenient.
+
+Then, you can edit your bash file to include a new alias:
+
+alias laravel="foremancreate"
+foremancreate(){
+    foreman build /path/to/htdocs/folder/$1 /path/to/scaffold.json
+    cd /path/to/htdocs/folder/$1
+    composer update
+    php artisan scaffold:file "app/models.txt"
+    php artisan migrate
+    php artisan db:seed
+}
+
+
+Then run laravel project-name and watch as your application is fully built and scaffolded for you :)
+
+Watch a demonstration on youtube  http://youtu.be/e7otZWQSqrY
+
+Features to be added for 1.0 release
+
+-nv option for no views
+-m option for migration only ( pivot tables )
+add field length option ( name:string|40 )
+on delete restrict/cascade/null
+remove model/controller/repository/views/seeds/tests if model is removed
+update model/controller/repository/views/seeds/tests if property is removed
