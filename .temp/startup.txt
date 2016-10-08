@@ -1,6 +1,89 @@
+  https://waffle.io/madsynn/LaraMaker
 
 
 
+
+
+    "php": ">=5.5.9",
+        "laravel/framework": "5.1.*",
+        "laravelcollective/html": "5.1.*",
+        "cartalyst/sentinel": "2.0.*",
+        "mcamara/laravel-localization": "1.0.*",
+        "barryvdh/laravel-debugbar": "2.2.*",
+        "barryvdh/laravel-ide-helper": "^2.1",
+        "barryvdh/laravel-dompdf": "0.6.*",
+        "davejamesmiller/laravel-breadcrumbs": "3.0.*",
+        "sseffa/video-api": "2.0.*",
+        "laracasts/flash": "^2.0",
+        "rap2hpoutre/laravel-log-viewer": "^0.5.3",
+        "cviebrock/eloquent-sluggable": "^3.1",
+        "intervention/image": "^2.3",
+        "caffeinated/menus": "^2.3",
+        "yajra/laravel-datatables-oracle": "~6.0",
+        "infyomlabs/laravel-generator": "dev-master",
+        "infyomlabs/core-templates": "dev-master",
+        "infyomlabs/swagger-generator": "dev-master",
+        "jlapp/swaggervel": "dev-master",
+        "doctrine/dbal": "^2.5",
+        "jeroen-g/laravel-packager": "^1.5",
+        "filp/whoops": "^2.1",
+        "mpociot/laravel-test-factory-helper": "^0.2.0",
+        "webpatser/laravel-uuid": "^2.0",
+        "orangehill/iseed": "^2.1",
+        "laravelba/laravel-js-routes": "^1.0",
+        "patricktalmadge/bootstrapper": "^5.9",
+        "maddhatter/laravel-fullcalendar": "~1.0",
+        "stripe/stripe-php": "3.*",
+        "paypal/rest-api-sdk-php": "*",
+        "evercode1/view-maker": "^3.5",
+        "beaudierman/ups": "^1.1",
+        "nesbot/carbon": "^1.21"
+
+https://laracasts.com/lessons/laravel-5-events
+https://github.com/jayaregalinada/common.git
+http://packalyst.com/packages/package/pion/laravel-support-controllers
+https://github.com/SilvertipSoftware/laravel-trait-pack
+https://github.com/molovo/laravel-model-traits.git
+"tshafer/laravel-traits":"1.*"
+https://github.com/ironsharkde/laravel-extendable
+https://github.com/mpociot/laravel-apidoc-generator
+https://github.com/winponta/treevel
+https://github.com/mpociot/captainhook
+https://github.com/mpociot/laravel-test-factory-helper
+https://github.com/mpociot/reflection-docblock
+https://github.com/mpociot/laravel-firebase-sync
+https://github.com/mpociot/laravel-composite-key
+
+https://github.com/mpociot/lavacharts
+		https://github.com/mpociot/PHP-CS-Fixer-1
+		https://github.com/mpociot/cockpit
+https://github.com/tshafer/laravel-traits
+https://github.com/mpociot/feature-switch
+https://github.com/evercode1/view-maker
+https://github.com/evercode1/trait-maker
+https://laravel.com/docs/5.0/eloquent#model-observers
+
+class UserObserver {
+
+    public function saving($model)
+    {
+        //
+    }
+
+    public function saved($model)
+    {
+        //
+    }
+
+}
+https://github.com/bpocallaghan/titan
+
+https://github.com/bpocallaghan/generators
+User::observe(new UserObserver);
+
+
+
+$input['log_time'] = Carbon::parse($request->log_time)->format('Y-m-d h:i');
 
 
 public function updatePortLog(Request $request,$calls, $sub_calls, $id )
