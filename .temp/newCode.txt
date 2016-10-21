@@ -1,9 +1,18 @@
 
 
-
+Config::get('fully
 
 FrQHeEMsR4ur
 cd ../var/www/vhosts/gracecompany/stage.grace
+
+
+alias euser='subl /var/www/vhosts/gracecompany/stage.grace/vendor/cartalyst/sentinel/src/Users/EloquentUser.php'
+
+
+
+@if(Sentinel::getUser()->inRole(['Admin', 'SuperAdmin'])):
+@endif
+
 
 alias productcontroller='subl /var/www/vhosts/gracecompany/stage.grace/app/Http/Controllers/ProductController.php'
 alias shop='cd /var/www/vhosts/gracecompany/stage.grace/resources/views/frontend/shop/'
@@ -14,6 +23,8 @@ alias resb='cd /var/www/vhosts/gracecompany/stage.grace/resources/views/backend'
 alias resf='cd /var/www/vhosts/gracecompany/stage.grace/resources/views/frontend'
 
 alias productcontroller='subl /var/www/vhosts/gracecompany/stage.grace/app/Http/Controllers/ProductController.php'
+alias cartcontroller='subl /var/www/vhosts/gracecompany/stage.grace/app/Http/Controllers/CartController.php'
+
 alias openshop='subl /var/www/vhosts/gracecompany/stage.grace/resources/views/frontend/shop/index.blade.php'
 alias shop='cd /var/www/vhosts/gracecompany/stage.grace/resources/views/frontend/shop/'
 alias ecom='cd /var/www/vhosts/gracecompany/stage.grace/resources/views/backend/ecom/'
@@ -56,6 +67,62 @@ query monitor
  <input id="databaseType-0-0" name="models[0][fields][0][type][db]" type="text" class="validate typeahead">
 
 
+tar -zcvf public-frontend.tar.gz /var/www/vhosts/gracecompany/stage.grace/public
+
+
+tar
+--exclude-vcs
+--exclude=*.mov
+--exclude=*.wmv
+--exclude=*.avi
+--exclude=.git/*
+--exclude=storage/*
+--exclude=cache/*
+--exclude=nbproject/*
+--exclude=zipa/*
+--exclude=zips/*
+--exclude=*.rar
+--exclude=*.tar.gz
+--exclude=*.zip
+--exclude=*.psd
+--exclude=*.tiff
+--exclude=*.tif
+--exclude=.phils/*
+--exclude=.temp/*
+--exclude=.idea/*
+--exclude=public/*
+--exclude=*.mp4
+ -zcvf
+outsourced-binstall-nopublic.tar.gz
+/home/vagrant/gr/outsourced
+
+&& mv ./outsourced-binstall-nopublic.tar.gz /home/vagrant/gr/outsourced/.down
+
+tar
+--exclude-vcs
+--exclude=*.mov
+--exclude=*.wmv
+--exclude=*.avi
+--exclude=.git/*
+--exclude=storage/*
+--exclude=cache/*
+--exclude=nbproject/*
+--exclude=zipa/*
+--exclude=zips/*
+--exclude=*.rar
+--exclude=*.tar.gz
+--exclude=*.zip
+--exclude=*.psd
+--exclude=*.tiff
+--exclude=*.tif
+--exclude=.phils/*
+--exclude=.idea/*
+--exclude=*.mp4
+ -zcvf
+outsourced-binstall.tar.gz
+/home/vagrant/gr/outsourced
+&& mv ./outsourced-binstall.tar.gz /home/vagrant/gr/outsourced/.down
+&&  chmod 777 /var/www/vhosts/.down -R
 
 
 
@@ -78,9 +145,10 @@ $cart = App\Models\Cart::fist();
 
 gzip -c qniquequilter.com-error.log > qniquequilter.com-error.log.gz
 
-tar -zcvf date +"%m_%d_%Y".tar.gz /var/www/vhosts/fungamesandtoys.com/wp-content/themes/knucklestrutz
+tar -zcvf outsourced-binstall.tar.gz /home/vagrant/gr/outsourced
 
-git archive --format=tar -o ~/buildingsets.toys-dec-15-2015.tar -v HEAD
+
+git archive --format=tar -o ~/outsourced-binstall.tar -v HEAD
 
 tar
 --exclude='*.jpg'
@@ -91,10 +159,32 @@ tar
 --exclude='*.avi'
 --exclude='*.mp4'
 --exclude='*.pdf'
+--exclude-vcs
+--exclude=*.mov
+--exclude=*.wmv
+--exclude=*.avi
+--exclude=.git/*
+--exclude=storage/*
+--exclude=cache/*
+--exclude=nbproject/*
+--exclude=zipa/*
+--exclude=zips/*
+--exclude=*.rar
+--exclude=*.tar.gz
+--exclude=*.zip
+--exclude=*.psd
+--exclude=*.tiff
+--exclude=*.tif
+--exclude=.phils/*
+--exclude=.idea/*
+--exclude=*.mp4
 -czf site.com.20130924.tgz /var/httpd/site.com
 
 tar --exclude-vcs --exclude=*.mov --exclude=*.wmv --exclude=*.avi --exclude=.git/* --exclude=.phils/* --exclude=.idea/* --exclude=*.mp4 -zcvf stage-grace-oct-5-2016.tar.gz /var/www/vhosts/gracecompany/stage.grace && mv /var/www/vhosts/gracecompany/stage-grace-oct-5-2016.tar.gz /var/www/vhosts/.down && chmod 777 /var/www/vhosts/.down && chmod 777 /var/www/vhosts/.down/stage-grace-oct-5-2016.tar.gz
 
+mv ./live-grace-oct-11-2016.tar.gz /var/www/vhosts/.down
+
+ mv /var/www/vhosts/gracecompany/stage-oct-6-2016.tar.gz /var/www/vhosts/.down
 
 tar
 --exclude-vcs
@@ -102,15 +192,26 @@ tar
 --exclude=*.wmv
 --exclude=*.avi
 --exclude=.git/*
+--exclude=storage/*
+--exclude=cache/*
+--exclude=nbproject/*
+--exclude=zipa/*
+--exclude=zips/*
+--exclude=*.rar
+--exclude=*.tar.gz
+--exclude=*.zip
+--exclude=*.psd
+--exclude=*.tiff
+--exclude=*.tif
 --exclude=.phils/*
 --exclude=.idea/*
 --exclude=*.mp4
  -zcvf
-live-grace-oct-5-2016.tar.gz
+live-grace-oct-11-2016.tar.gz
 /var/www/vhosts/gracecompany/stage.grace
-&& mv /var/www/vhosts/gracecompany/live-grace-oct-5-2016.tar.gz /var/www/vhosts/.down
+&& mv /var/www/vhosts/gracecompany/live-grace-oct-11-2016.tar.gz /var/www/vhosts/.down
 && chmod 777 /var/www/vhosts/.down
-&& chmod 777 /var/www/vhosts/.down/live-grace-oct-5-2016.tar.gz
+&& chmod 777 /var/www/vhosts/.down/live-grace-oct-11-2016.tar.gz
 
 
 \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -128,7 +229,78 @@ tabs tabs-bordered clearfix ui-tabs ui-widget ui-widget-content ui-corner-all
 
 
 
-find . -type f | grep -v -E "(.idea|.git)" | while read file
+
+
+
+
+
+
+
+
+
+
+
+
+http://stackoverflow.com/questions/20412738/laravel-check-if-yield-empty-or-not/24583340#24583340
+http://stackoverflow.com/a/24583340/167815
+You can simply check if the section exists:
+
+if (isset($__env->getSections()['title'])) {
+
+    @yield('title');
+}
+And you can even go a step further and pack this little piece of code into a Blade extension: http://laravel.com/docs/templates#extending-blade
+
+
+
+
+<?php namespace App\Providers;
+use Blade;
+use Illuminate\Support\ServiceProvider;
+class BladeServiceProvider extends ServiceProvider {
+    /**
+     * Bootstrap the application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        // e.g.
+        // @ifSection('breadcrumbs')
+        //     <div class="breadcrumbs">
+        //         @yield('breadcrumbs')
+        //     </div>
+        // @else
+        //     (Optional default value)
+        // @endif
+        Blade::extend(function($view, $compiler)
+        {
+            $pattern = $compiler->createMatcher('ifSection');
+            return preg_replace($pattern, '$1<?php if (isset($__env->getSections()[$2])): ?>', $view);
+        });
+    }
+    /**
+     * Register the application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
+    }
+}
+
+
+
+
+ProductObserver
+
+
+
+
+
+
+find . -type f | grep -v -E "(fully.|config('fully.')  )" | while read file
 do
   # Do something with $file
 done
@@ -987,6 +1159,15 @@ cat /c/Users/Phillip/.ssh/id_rsa.gracecompany.pub | ssh github "mkdir ~/.ssh; ca
 
     </script>
 
+
+
+
+Sentinel::getUser()->first_name . ' ' . Sentinel::getUser()->last_name
+Sentinel::getUser()->email
+Sentinel::getUser()->id
+
+
+
 <?php $i=0 ?>
 @foreach ($products as $product)
 ga('ec:addImpression', {
@@ -1001,6 +1182,30 @@ ga('ec:addImpression', {
 ga('ec:setAction', 'detail');
 ga('send', 'event', 'catalog', 'impression', {'nonInteraction': true});
 @endforeach
+
+
+            @if(Sentinel::getUser()->inRole(['Admin', 'SuperAdmin'])):
+            <li class="treeview">
+                <a href="#"> <i class="fa fa-share"></i> <span>Developer Area</span> <i class="fa fa-angle-left pull-right"></i> </a>
+                <ul class="treeview-menu" style="display:none;">
+                    <li class="treeview {{ setActive(['admin/logs*', 'admin/form-post']) }}">
+                        <a href="#"> <i class="fa fa-thumb-tack"></i> <span>Records</span>
+                        <i class="fa fa-angle-left pull-right"></i> </a>
+                        <ul class="treeview-menu">
+                            <li><a target="_blank" href="{{ url(getLang() . '/admin/logs') }}"><i class="fa fa-save"></i> Log</a></li>
+                            <li>
+                                <a href="{{ url(getLang() . '/admin/form-post') }}"><i class="fa fa-envelope"></i> Form Post</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="{{ setActive('admin/menu*') }}"><a href="{{ url(getLang() . '/admin/menu') }}"> <i class="fa fa-bars"></i> <span>Menu</span> </a>
+                    </li>
+                    <li class="{{ setActive('admin/settings*') }}">
+                        <a href="{{ url(getLang() . '/admin/settings') }}"> <i class="fa fa-gear"></i> <span>Settings</span> </a>
+                    </li>
+                </ul>
+            </li>
+            @endif
 
 
 

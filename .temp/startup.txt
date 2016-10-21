@@ -1,6 +1,9 @@
   https://waffle.io/madsynn/LaraMaker
 
 
+  @each('view.name', $jobs, 'job')
+
+
 ├── Commands
 │   └── Command.php
 ├── Console
@@ -39,6 +42,212 @@
 ├── Services
 │   └── Registrar.php
 └── User.php
+
+
+├── Authenticate.php
+
+
+├── Controllers
+
+└── Command.php
+
+
+layout.blade.php
+│	└── INCLUDES header.blade.php
+│ 		└── INCLUDES menu-cart.blade.php  (this part needs to show the cart products  and is not working)
+└── EXTENDS
+ 	└── index.blade.php
+ 		├── INCLUDES product-details.blade.php
+  		├── INCLUDES product-sidebar.blade.php
+ 		├── INCLUDES product-features.blade.php
+  		├── INCLUDES product-options.blade.php
+		└── INCLUDES product-additional.blade.php
+
+
+├── EXTENDS
+│   └── RouteServiceProvider.php
+ 		├── INCLUDES
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{
+    "require": {
+        "florianwolters/component-util-observer": "0.1.*"
+    }
+}
+
+----------------------------------------------
+I've created 2 helpers :
+
+if (!function_exists('classActivePath')) {
+    function classActivePath($path)
+    {
+        return Request::is($path) ? ' class="active"' : '';
+    }
+}
+
+if (!function_exists('classActiveSegment')) {
+    function classActiveSegment($segment, $value)
+    {
+        if(!is_array($value)) {
+            return Request::segment($segment) == $value ? ' class="active"' : '';
+        }
+        foreach ($value as $v) {
+            if(Request::segment($segment) == $v) return ' class="active"';
+        }
+        return '';
+    }
+}
+And I use it as this :
+
+<li {!! classActivePath('medias') !!}>
+    <a href="{!! route('medias') !!}"><span class="fa fa-fw fa-file-image-o"></span> {{ trans('back/admin.medias') }}</a>
+</li>
+<li {!! classActiveSegment(1, 'blog') !!}>
+    <a href="#" data-toggle="collapse" data-target="#articlemenu"><span class="fa fa-fw fa-pencil"></span> {{
+    ...
+</li>
+
+----------------------------------------------
+
+It is more versatile.
+
+if (!function_exists('classActivePath')) {
+    function classActivePath($path)
+    {
+        $path = explode('.', $path);
+        $segment = 1;
+        foreach($path as $p) {
+            if((request()->segment($segment) == $p) == false) {
+                return '';
+            }
+            $segment++;
+        }
+        return ' active';
+    }
+}
+ <ul>
+    <li class="{!! classActivePath('order') !!}">
+        <a href="#">Order</a>
+        <ul>
+            <li class="{!! classActivePath('order.index') !!}">
+                <a href="{{ route('order.index') }}"> Orders</a>
+            </li>
+            <li class="{!! classActivePath('order.index') !!}">
+                <a href="{{ route('order.create') }}"> Order Create</a>
+            </li>
+        </ul>
+    </li>
+</ul>
+
+
+----------------------------------------------
+if (!function_exists('menuActiveRoute')) {
+    function menuActiveRoute($routeName, $includeClass = true, $className = 'active') {
+        return preg_match('/^' . preg_quote($routeName, '/') . '/', \Request::route()->getName()) ? ($includeClass ? "class=\"{$className}\"": $className): '';
+    }
+}
+----------------------------------------------
+
+	https://laracasts.com/discuss/channels/general-discussion/best-practice-for-handling-active-menu-item-in-l5
+
+
+I've seen this package used by a few demos, and and trying it out myself:
+
+https://github.com/laravelista/Ekko
+
+So far, it's working well, but it needs a wildcard or pattern match for the route name, for which I'm working on a PR.
+
+Edit: Ekko now supports wildcard path names and multiple path names. This is absolutely essential for my use-case as some parts of my admin structure are four levels deep (since it models some real-life structures that need to be set up). This allows multiple sub-menus to activate the top-level menu that they are under. The wildcards then support resource-based URLs.
+
+This is my top-level side-menu option for a "show", which lights up when any of about 30 pages under it are being used:
+
+<li class="{{ Ekko::areActiveRoutes(['admin.shows.*', 'admin.shows.groups.*', 'admin.shows.groups.judges.*', 'admin.shows.products.*', 'admin.shows.orders.*']) }}">
+    <a href="{{ route('admin.shows.index') }}">Shows</a>
+</li>
+My aims in choosing this were:
+
+Not to reinvent this common requirement yet again. Yes, the 80% use-case might be quick and simple, but you will quickly hit limitations once your application becomes a little more complex.
+Choose an open source package that gets most of the way and offer PRs to improve it to better fit my use-case (for both me and others in future projects).
+To minimise PHP in the HTML markup - conditions, ternary operator etc. Just calling a function was the most I wanted to put into the markup.
+To match against route names rather than paths. The path stays in routes.php in my applications and ALL other parts of the application just refer to route names. That way paths can be moved and juggled around as the application and its needs grow, without the need to find every instance that references a path.
+On that last point, Ekko does support path matches too, so it's there if you want to use it.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------------------------------------
+----------------------------------------------
+----------------------------------------------
+
+--------------------------------------------------------------------------------------------
+----------------------------------------------
+
+
+	<a href="http://www.facebook.com/share.php?u=http://www.quiltingindustry.com"><img src="http://yourdomain.com/images/facebook_icon.png" border="0" /></a>
+
+
+	<div id="navbar" class="collapse navbar-collapse">
+	<ul class="nav navbar-nav">
+
+	<li {{{ (Request::is('dashboard') ? 'class=active' : '') }}}>
+	<a href="{{action('action to see the view')}}">Home</a>
+	</li>
+
+	<li {{{ (Request::is('companies') ? 'class=active' : '') }}}>
+	<a href="{{action('action to see the view')}}">Companies</a>
+	</li>
+	</ul>
+
+	</div><!--/.nav-collapse -->
 
 
     "php": ">=5.5.9",
